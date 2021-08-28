@@ -34,7 +34,7 @@ var colorWheel = [ beige, magenta, orange, blue, yellow ];
 new Zdog.Shape({
   addTo: illo,
   // no path set, default to single point
-  stroke: 32,
+  stroke: 33,
   color: '#30f385',
 });
 
