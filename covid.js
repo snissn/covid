@@ -67,7 +67,7 @@ if (basecolorpicker < .2){
   basecolor = "#ffffff";
 } else if ( basecolorpicker < .6){
 
-  basecolor = "#d62828";
+  basecolor = "#f07167"; // Other options #f94144 #e07a5f #ee6c4d
 }else if (basecolorpicker < .8){
   
   basecolor = "#003049";
