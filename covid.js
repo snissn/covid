@@ -3,8 +3,24 @@ var cheese = false;
 if(seed === undefined){
   seed = window.location.search.split("?seed=")[1]
 }
+Math.seed = seed;
+ 
+// in order to work 'Math.seed' must NOT be undefined,
+// so in any case, you HAVE to provide a Math.seed
+Math.seededRandom = function(max, min) {
+    max = max || 1;
+    min = min || 0;
+ 
+    Math.seed = (Math.seed * 9301 + 49297) % 233280;
+    var rnd = Math.seed / 233280;
+ 
+    return min + rnd * (max - min);
+}
+superseed = Math.seededRandom()
+console.log(superseed)
 
-function run(seed){
+
+function run(){
 var illoElem = document.querySelector('.illo');
 var illoSize = 64;
 var minWindowSize = Math.min( window.innerWidth, window.innerHeight );
@@ -35,9 +51,12 @@ var blue = '#8AD';
 // Color Pallets
 
 
-colorpicker = contagium = Math.random() ;
-basecolorpicker = Math.random() ; 
-contagium = Math.random() / 10;
+colorpicker = (superseed % .1) * 10
+console.log("colorpicker: " + colorpicker);
+basecolorpicker = (superseed %.01) * 100
+console.log("basecolorpicker: " + basecolorpicker);
+contagium = superseed / 10
+console.log("contagoum: " + contagium);
 var color;
 var basecolor;
 
@@ -192,7 +211,9 @@ function animate() {
 animate();
 console.log(contagium);
 console.log(color);
-console.log(basecolor)
+console.log(basecolor);
+
+
 
 // -- update -- //
 
@@ -209,9 +230,9 @@ function spin() {
   var thetaX = Zdog.lerp( keyA.x, keyB.x, tween );
   // illo.rotate.x = Math.cos( thetaX ) * TAU/12;
   // illo.rotate.y = Zdog.lerp( keyA.y, keyB.y,      tween )
-  illo.rotate.y +=  contagium
-  illo.rotate.z += contagium
-  illo.rotate.x +=  contagium ;
+  illo.rotate.y +=  contagium + contagium/10
+  illo.rotate.z += contagium +contagium/8
+  illo.rotate.x +=  contagium + contagium/6
   ticker++;
 }
 
