@@ -1,4 +1,10 @@
-function run(){
+var seed = document.location.hash.split("#")[1]
+var cheese = false;
+if(seed === undefined){
+  seed = window.location.search.split("?seed=")[1]
+}
+
+function run(seed){
 var illoElem = document.querySelector('.illo');
 var illoSize = 64;
 var minWindowSize = Math.min( window.innerWidth, window.innerHeight );
@@ -26,16 +32,37 @@ var magenta = '#C25';
 // var navy = '#249';
 var beige = '#FEC';
 var blue = '#8AD';
+// Color Pallets
+
+colorpicker = contagium = Math.random() ;
+contagium = Math.random() / 10;
+var color;
+
+if (colorpicker < .2){
+  var colorWheel = ["#c7fbfa", "#9be0e0", "#75bdbd",]
+  color = "alien";
+}else if (colorpicker < .4){
+  var colorWheel =["#7da269","#5e7153"] 
+  color = "zombie";
+} else if ( colorpicker < .6){
+  var colorWheel =['#a88c6b','#6a563f','#846f56'] 
+  color = "ape";
+}else if (colorpicker < .8){
+  var colorWheel  = ['#feeab6','#c84e31','#fe9650','#ffb508']
+  color = "pizza";
+} else{
+  var colorWheel = [ beige, magenta, orange, blue, yellow ];
+  color = "normal";
+}
 
 
-var colorWheel = [ beige, magenta, orange, blue, yellow ];
 
 // ----- model ----- //
 new Zdog.Shape({
   addTo: illo,
   // no path set, default to single point
   stroke: 33,
-  color: '#30f385',
+  color: "#000000",
 });
 
 // top & bottom
@@ -75,7 +102,7 @@ cone.copy({
       translate: { y: 16*ySide },
       rotate: { x: -TAU/4*ySide },
       color: colorWheel[i],
-      backface: colorWheel[ (i+7) % 5 ],
+    //  backface: colorWheel[ (i+7) % 5 ],
     });
   }
 });
@@ -142,6 +169,8 @@ function animate() {
 }
 
 animate();
+console.log(contagium);
+console.log(color);
 
 // -- update -- //
 
@@ -158,9 +187,9 @@ function spin() {
   var thetaX = Zdog.lerp( keyA.x, keyB.x, tween );
   // illo.rotate.x = Math.cos( thetaX ) * TAU/12;
   // illo.rotate.y = Zdog.lerp( keyA.y, keyB.y,      tween )
-  illo.rotate.y +=  0.01
-illo.rotate.z += 0.01
-illo.rotate.x +=  0.01 ;
+  illo.rotate.y +=  contagium
+  illo.rotate.z += contagium
+  illo.rotate.x +=  contagium ;
   ticker++;
 }
 
@@ -168,5 +197,5 @@ illo.rotate.x +=  0.01 ;
 
 window.addEventListener('load', (event) => {
 
-  run();
+  run(seed);
 });
