@@ -34,9 +34,13 @@ var beige = '#FEC';
 var blue = '#8AD';
 // Color Pallets
 
+
 colorpicker = contagium = Math.random() ;
+basecolorpicker = Math.random() ; 
 contagium = Math.random() / 10;
 var color;
+var basecolor;
+
 
 if (colorpicker < .2){
   var colorWheel = ["#c7fbfa", "#9be0e0", "#75bdbd",]
@@ -55,6 +59,23 @@ if (colorpicker < .2){
   color = "normal";
 }
 
+if (basecolorpicker < .2){
+
+  basecolor = "#000000";
+}else if (basecolorpicker < .4){
+
+  basecolor = "#ffffff";
+} else if ( basecolorpicker < .6){
+
+  basecolor = "#d62828";
+}else if (basecolorpicker < .8){
+  
+  basecolor = "#003049";
+} else{
+
+  basecolor = "#fcbf49";
+}
+
 
 
 // ----- model ----- //
@@ -62,7 +83,7 @@ new Zdog.Shape({
   addTo: illo,
   // no path set, default to single point
   stroke: 33,
-  color: "#000000",
+  color: basecolor,
 });
 
 // top & bottom
@@ -171,6 +192,7 @@ function animate() {
 animate();
 console.log(contagium);
 console.log(color);
+console.log(basecolor)
 
 // -- update -- //
 
